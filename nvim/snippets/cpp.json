@@ -1,0 +1,31 @@
+{
+  "optget": {
+    "prefix": "optget",
+    "body": [
+      "int choice;",
+      "int index = 0;",
+      "option long_options[] = {",
+      //       "{$0, required_argument, nullptr, '$1'},",
+      //       "{nullptr, 0, nullptr, '\0'},",
+      "}; // long_options[]",
+    ],
+    "description": "getopt implement",
+  },
+  "main": {
+    "prefix": "main",
+    "body": [
+      "int main(int argc, char *argv[]) {",
+      "$0",
+      "return 0;\n",
+      "}\n",
+    ],
+    "description": "main func",
+  },
+  "cout": {
+    "prefix": "cout",
+    "body": [
+      "std::cout << 123 << std::endl;",
+    ],
+    "description": "cout",
+  },
+}
