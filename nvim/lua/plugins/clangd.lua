@@ -23,7 +23,18 @@ return {
         desc = "Load clangd_extensions with clangd",
         callback = function(args)
           if assert(vim.lsp.get_client_by_id(args.data.client_id)).name == "clangd" then
-            require "clangd_extensions"
+            require("clangd_extensions").setup {
+              server = {
+                -- Enable clangd's inlay hints
+                inlay_hints = {
+                  enable = true, -- Enable inlay hints
+                  only_current_line = false, -- Show hints for all lines (not just the current line)
+                  show_variable_name = true, -- Show the variable name in hints
+                  show_types = true, -- Show types in hints
+                  show_param_names = true, -- Show parameter names in hints
+                },
+              },
+            }
             -- add more `clangd` setup here as needed such as loading autocmds
             vim.api.nvim_del_augroup_by_id(augroup) -- delete auto command since it only needs to happen once
           end

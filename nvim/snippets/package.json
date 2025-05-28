@@ -9,6 +9,12 @@
       {
         "language": "cpp",
         "path": "./cpp.json"
+      },
+      {
+        "language": [
+          "lua"
+        ],
+        "path": "./lua.json"
       }
     ]
   }

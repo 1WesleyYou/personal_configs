@@ -134,12 +134,56 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+alias conda='/opt/anaconda3/bin/conda'
+
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # 如果使用命令 brew 安装，则是添加这条命令语句
 
 export PATH="$HOME/.local/bin:$PATH"
 
-export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources
+alias obsidian='nvim ~/Desktop/wesley_blog/source/_posts/wesley_knowledge_repo/'
+alias obs=obsidian
+alias obsp='tmpp=$(pwd) && cd ~/Desktop/wesley_blog && hexo g && hexo d && cd $tmpp'
+
 alias g++='g++ -std=c++17'
 export PATH="$HOME/.cargo/bin:$PATH"
 alias lg='lazygit'
+alias ld='lazydocker'
+
+export PATH="/Applications/WezTerm.app/Contents/MacOS:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="$(brew --prefix)/opt/llvm/bin:$PATH"
+
+alias rg='ranger'
+
+export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources
+
+export JAVA_HOME="$(/usr/libexec/java_home -v 11)"
+export PATH="$JAVA_HOME/bin:$PATH"
+
+# —— Hadoop 环境 —— 
+export HADOOP_HOME=/opt/homebrew/Cellar/hadoop/3.4.1/libexec
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH
+
+OBSIDIAN_PATH=~/Desktop/wesley_blog/source/_posts/wesley_knowledge_repo/
+OBSIOS=$OBSIDIAN_PATH/os
+
+function to_obs_os(name) {
+    if [ -z "$name" ]; then
+        echo "Please provide a name for the file."
+        return 1
+    fi
+
+    local obsidian_path="$OBSIDIAN_PATH"
+    local obsidian_file="$obsidian_path$name.md"
+
+    if [ ! -f "$obsidian_file" ]; then
+        echo "File $obsidian_file does not exist."
+        return 1
+    fi
+
+    cp "$obsidian_file" "$OBSIOS"
+    echo "Copied $obsidian_file to $OBSIOS"
+}

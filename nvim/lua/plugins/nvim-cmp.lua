@@ -15,6 +15,7 @@ return {
         end, "copilot")
       end,
     },
+    { "kdheepak/cmp-latex-symbols" },
   },
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
