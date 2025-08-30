@@ -10,7 +10,7 @@ fi
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
+# export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -78,7 +78,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -115,26 +115,24 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 tmux
-~/.config/tmux/plugins/catppuccin/catppuccin.tmux
+~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
 tmux source ~/.tmux.conf
 
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-alias conda='/opt/anaconda3/bin/conda'
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/opt/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/opt/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+#
+# alias conda='/opt/miniconda3/bin/conda'
 
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # 如果使用命令 brew 安装，则是添加这条命令语句
@@ -153,37 +151,41 @@ alias ld='lazydocker'
 export PATH="/Applications/WezTerm.app/Contents/MacOS:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH="$(brew --prefix)/opt/llvm/bin:$PATH"
 
 alias rg='ranger'
 
-export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-export JAVA_HOME="$(/usr/libexec/java_home -v 11)"
-export PATH="$JAVA_HOME/bin:$PATH"
+PATH=~/.console-ninja/.bin:$PATH
 
-# —— Hadoop 环境 —— 
-export HADOOP_HOME=/opt/homebrew/Cellar/hadoop/3.4.1/libexec
-export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
-export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH
+export HYPRCURSOR_THEME="Bibata-Modern-Amber"
 
-OBSIDIAN_PATH=~/Desktop/wesley_blog/source/_posts/wesley_knowledge_repo/
-OBSIOS=$OBSIDIAN_PATH/os
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export PATH="/usr/lib/jvm/java-8-openjdk/bin:$PATH"
 
-function to_obs_os(name) {
-    if [ -z "$name" ]; then
-        echo "Please provide a name for the file."
-        return 1
+alias asusctl='sudo asusctl'
+
+# 在 conda init 之前，先禁用 cryptography 对 legacy 算法的依赖
+export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=1
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/miniconda3/bin:$PATH"
     fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
-    local obsidian_path="$OBSIDIAN_PATH"
-    local obsidian_file="$obsidian_path$name.md"
+export CUDA_HOME=/opt/cuda
+export PATH=$CUDA_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 
-    if [ ! -f "$obsidian_file" ]; then
-        echo "File $obsidian_file does not exist."
-        return 1
-    fi
-
-    cp "$obsidian_file" "$OBSIOS"
-    echo "Copied $obsidian_file to $OBSIOS"
-}
+alias v='nvim'
+alias n='neofetch'
